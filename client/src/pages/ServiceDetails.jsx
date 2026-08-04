@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 function ServiceDetails() {
   const { id } = useParams();
@@ -46,6 +46,14 @@ function ServiceDetails() {
       <p>
         <strong>Category:</strong> {service.category}
       </p>
+
+      <Link 
+      className="button button--primary"
+      to={`/book/${service._id}`}
+      > 
+      Book Appointment
+
+      </Link>
 
     </div>
   );
