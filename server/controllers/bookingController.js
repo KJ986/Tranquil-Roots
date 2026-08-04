@@ -63,10 +63,12 @@ const createBooking = async (req, res) => {
   }
 };
 
-// Get all bookings
+// Get all bookings for the logged- in user
 const getBookings = async (req, res) => {
   try {
-    const bookings = await Booking.find()
+    const bookings = await Booking.find({
+        user: req.user._id,
+    })
       .populate("user", "firstName lastName email")
       .populate("service", "name duration price category")
       .sort({ appointmentDate: 1 });
