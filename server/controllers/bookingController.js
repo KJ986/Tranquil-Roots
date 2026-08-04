@@ -4,7 +4,24 @@ const Service = require("../models/Service");
 // Create a new booking
 const createBooking = async (req, res) => {
   try {
-    const { service, appointmentDate, notes } = req.body;
+    const {
+        service, 
+        appointmentDate, 
+        notes, 
+        contact,
+     } = req.body;
+
+     if (
+        !contact ||
+        !contact.firstName ||
+        !contact.lastName ||
+        !contact.email ||
+        !contact.phone
+     ) {
+        return res.status(400).json({
+            message: "Complete contact information is required.",
+        });
+     }
 
     // Make sure the selected service exists
     const selectedService = await Service.findById(service);
@@ -19,6 +36,12 @@ const createBooking = async (req, res) => {
     const booking = await Booking.create({
       user: req.user._id,
       service,
+      contact: {
+        firstName: contact.firstName,
+        lastName: contact.lastName,
+        email: contact.email,
+        phone: contact.phone,
+      },
       appointmentDate,
       notes,
     });

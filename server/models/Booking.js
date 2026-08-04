@@ -14,6 +14,36 @@ const bookingSchema = new mongoose.Schema(
       required: true,
     },
 
+    contact: {
+        firstName: {
+            type: String,
+            required: true,
+            trim: true,
+        
+    },
+
+    lastName: {
+        type: String,
+        required: true,
+        trim: true,
+
+    },
+
+    email: {
+        type: String,
+        required: true,
+        trim: true,
+        lowercase: true,
+    },
+
+    phone: {
+        type: String,
+        required: true,
+        trim: true,
+        lowercase: true,
+    },
+},
+
     appointmentDate: {
       type: Date,
       required: true,
