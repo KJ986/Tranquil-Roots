@@ -1,0 +1,193 @@
+.hero {
+  position: relative;
+  display: grid;
+  min-height: 76vh;
+  place-items: center;
+  padding: 5rem 6%;
+  overflow: hidden;
+  background:
+    linear-gradient(rgba(239, 231, 216, 0.75), rgba(239, 231, 216, 0.85)),
+    radial-gradient(circle at top left, #d8e2d3, transparent 45%),
+    #e8dfd2;
+}
+
+.hero::before,
+.hero::after {
+  position: absolute;
+  content: "";
+  border-radius: 50%;
+  background: rgba(107, 142, 110, 0.18);
+}
+
+.hero::before {
+  width: 340px;
+  height: 340px;
+  top: -100px;
+  right: -80px;
+}
+
+.hero::after {
+  width: 240px;
+  height: 240px;
+  bottom: -100px;
+  left: -60px;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+  max-width: 780px;
+  text-align: center;
+}
+
+.hero__logo {
+  display: block;
+  width: min(320px, 75vw);
+  max-height: 320px;
+  margin: 0 auto 1.5rem;
+  object-fit: contain;
+  border-radius: 28px;
+  box-shadow: 0 18px 45px rgba(45, 68, 51, 0.16);
+}
+
+.hero__eyebrow,
+.section__eyebrow {
+  margin-bottom: 1rem;
+  color: #6b8e6e;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18rem;
+  text-transform: uppercase;
+}
+
+.hero h1,
+.section h2,
+.home-cta h2 {
+  font-family: "Cormorant Garamond", serif;
+}
+
+.hero h1 {
+  margin-bottom: 1.3rem;
+  color: #2c4b32;
+  font-size: clamp(3rem, 8vw, 6.5rem);
+  line-height: 0.95;
+}
+
+.hero__description {
+  max-width: 650px;
+  margin: 0 auto 2rem;
+  color: #536057;
+  font-size: 1.08rem;
+  line-height: 1.8;
+}
+
+.hero__buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.section {
+  padding: 5rem 8%;
+}
+
+.intro {
+  max-width: 900px;
+  margin: auto;
+  text-align: center;
+}
+
+.intro h2 {
+  margin-bottom: 1rem;
+  color: #2c4b32;
+  font-size: clamp(2.2rem, 5vw, 4rem);
+}
+
+.intro p:last-child {
+  max-width: 700px;
+  margin: auto;
+  color: #69736c;
+  line-height: 1.8;
+}
+
+.benefits {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  padding-top: 1rem;
+}
+
+.benefit-card {
+  padding: 2rem;
+  border: 1px solid rgba(53, 94, 59, 0.1);
+  border-radius: 24px;
+  background: #fffdf9;
+  box-shadow: 0 14px 38px rgba(45, 68, 51, 0.08);
+}
+
+.benefit-card span {
+  display: block;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+}
+
+.benefit-card h3 {
+  color: #355e3b;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.8rem;
+}
+
+.benefit-card p {
+  margin-bottom: 0;
+  color: #687269;
+  line-height: 1.7;
+}
+
+.home-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  margin: 2rem 6% 5rem;
+  padding: 3rem;
+  border-radius: 28px;
+  background: #355e3b;
+  color: white;
+}
+
+.home-cta .section__eyebrow {
+  color: #d8c58e;
+}
+
+.home-cta h2 {
+  margin-bottom: 0;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+}
+
+@media (max-width: 800px) {
+  .benefits {
+    grid-template-columns: 1fr;
+  }
+
+  .home-cta {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 520px) {
+  .hero {
+    min-height: 68vh;
+  }
+
+  .section {
+    padding: 4rem 6%;
+  }
+
+  .home-cta {
+    margin-right: 4%;
+    margin-left: 4%;
+    padding: 2rem;
+  }
+}

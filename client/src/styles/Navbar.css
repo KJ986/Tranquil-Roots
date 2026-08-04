@@ -1,0 +1,34 @@
+.navbar__logo {
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.navbar__brand-text strong {
+  display: block;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.navbar__brand-text small {
+  display: block;
+  margin-top: 0.25rem;
+  color: #6b746d;
+  font-size: 0.68rem;
+  letter-spacing: 0.08rem;
+  text-transform: uppercase;
+}
+
+.navbar__icon {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  border: 1px solid rgba(53, 94, 59, 0.25);
+  border-radius: 50%;
+  color: #355e3b;
+  font-size: 2rem;
+  background: #f1eadf;
+}

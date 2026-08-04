@@ -31,6 +31,8 @@
 - [x] Push project to GitHub
 - [x] Create README
 - [x] Create .gitignore
+- [x] Login 
+- [x] JWT Authentication
 
 ### Backend
 
@@ -41,6 +43,7 @@
 - [x] Create auth controller
 - [x] Register users
 - [x] Hash passwords using bcrypt
+- [x] protected routes
 
 ### Testing
 
@@ -51,10 +54,6 @@
 # 🚧 Currently Working On
 
 Authentication
-
-- [ ] Login
-- [ ] JWT Authentication
-- [ ] Protected Routes
 - [ ] Logout
 
 ---

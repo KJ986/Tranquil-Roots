@@ -6,7 +6,8 @@ require("dotenv").config();
 const connectDB = require("./config/db");
 
 const authRoutes = require("./routes/authRoutes");
-
+const serviceRoutes = require("./routes/serviceRoutes");
+const bookingRoutes = require("./routes/bookingRoutes");
 
 //Create Express App
 const app = express();
@@ -21,6 +22,9 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
+app.use("/api/services", serviceRoutes);
+
+app.use("/api/bookings", bookingRoutes);
 
 
 //First route
