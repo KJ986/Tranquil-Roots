@@ -12,6 +12,8 @@ import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 import ServiceDetails from "./pages/ServiceDetails";
 
+import EditBooking from "./pages/EditBooking";
+
 function App() {
   return (
     <div className="app">
@@ -28,6 +30,8 @@ function App() {
           <Route path="/book/:serviceId" element={<Booking />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="*" element={<NotFound />} />
+        <Route path="/bookings/:bookingId/edit" element={<EditBooking />}
+        />
         </Routes>
       </main>
 

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "../styles/Dashboard.css";
+import { Link } from "react-router-dom";
 
 function Dashboard() {
     const [bookings, setBookings] = useState([]);
@@ -164,9 +165,12 @@ function Dashboard() {
               )}
 
               <div className="booking-card__actions">
-                <button className="button button--secondary" type="button">
-                  Edit Appointment
-                </button>
+                <Link
+                className="button button--secondary"
+                to={`/bookings/${booking._id}/edit`}
+                >
+                    Edit Appointment
+                </Link>
 
                 <button className="button button--danger" type="button">
                   Cancel Appointment

@@ -86,29 +86,36 @@ const getBookings = async (req, res) => {
   }
 };
 
-//Get a booking by ID
-const getBookingById = async (req, res) => {
-    try {
-        const booking = await Booking.findById(req.params.id)
-        .populate("user", "firstName lastName email")
-        .populate("service", "name duration price  category");
 
-        if (!booking) {
-            return res.status(404).json({
-                message: "Booking not found.",
-            });
-        }
-        res.status(200).json({
-            booking,
-        });
-    } catch (error) {
-        console.error(error);
-         
-        res.status(500).json({
-            message: "Server error.",
-        });
+
+    // Get one booking
+const getBookingById = async (req, res) => {
+  try {
+    const booking = await Booking.findOne({
+      _id: req.params.id,
+      user: req.user._id,
+    })
+      .populate("service", "name duration category")
+      .populate("user", "firstName lastName email");
+
+    if (!booking) {
+      return res.status(404).json({
+        message: "Booking not found.",
+      });
     }
-    };
+
+    res.status(200).json({
+      booking,
+    });
+
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      message: "Server error.",
+    });
+  }
+};
 
     //Update a Booking
     const updateBooking = async (req, res) => {
@@ -121,7 +128,7 @@ const getBookingById = async (req, res) => {
                     runValidators: true,
                 }
             )
-            .populate("user", "fistName lastName email")
+            .populate("user", "firstName lastName email")
             .populate("service", "name duration price category");
 
             if (!booking) {
