@@ -121,7 +121,10 @@ const getBookingById = async (req, res) => {
     const updateBooking = async (req, res) => {
         try { 
             const booking = await Booking.findByIdAndUpdate(
-                req.params.id,
+                {
+                    _id: req.params.id,
+                    user: req.user._id,
+                },
                 req.body,
                 {
                     new: true,
@@ -148,11 +151,15 @@ const getBookingById = async (req, res) => {
             });
         }
     };
+    
 
-    // Delete a booking
+ // Delete a booking that belongs to the logged-in user
 const deleteBooking = async (req, res) => {
   try {
-    const booking = await Booking.findByIdAndDelete(req.params.id);
+    const booking = await Booking.findOneAndDelete({
+      _id: req.params.id,
+      user: req.user._id,
+    });
 
     if (!booking) {
       return res.status(404).json({
@@ -161,10 +168,16 @@ const deleteBooking = async (req, res) => {
     }
 
     res.status(200).json({
-      message: "Booking deleted successfully!",
+      message: "Booking cancelled successfully!",
     });
   } catch (error) {
     console.error(error);
+
+    if (error.name === "CastError") {
+      return res.status(400).json({
+        message: "Invalid booking ID.",
+      });
+    }
 
     res.status(500).json({
       message: "Server error.",

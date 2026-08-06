@@ -38,6 +38,49 @@ function Dashboard() {
         fetchBookings();
  }, []);
 
+
+const handleCancelBooking = async (bookingId, serviceName) => {
+  const userConfirmed = window.confirm(
+    `Are you sure you want to cancel your ${serviceName} appointment?`
+  );
+
+  if (!userConfirmed) {
+    return;
+  }
+
+  try {
+    const token = localStorage.getItem("token");
+
+    const response = await fetch(
+      `http://localhost:5000/api/bookings/${bookingId}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(
+        data.message || "Unable to cancel appointment."
+      );
+    }
+
+    setBookings((previousBookings) =>
+      previousBookings.filter(
+        (booking) => booking._id !== bookingId
+      )
+    );
+  } catch (error) {
+    console.error(error);
+    alert(error.message);
+  }
+};
+
+
  return (
     
   <main className="dashboard-page">
@@ -172,9 +215,20 @@ function Dashboard() {
                     Edit Appointment
                 </Link>
 
-                <button className="button button--danger" type="button">
-                  Cancel Appointment
-                </button>
+
+<button
+  className="button button--danger"
+  type="button"
+  onClick={() =>
+    handleCancelBooking(
+      booking._id,
+      booking.service.name
+    )
+  }
+>
+  Cancel Appointment
+</button>
+               
               </div>
             </article>
           ))}
