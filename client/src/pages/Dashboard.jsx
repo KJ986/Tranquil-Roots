@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "../styles/Dashboard.css";
 import { Link } from "react-router-dom";
+import WellnessTips from "../components/WellnessTips";
 
 function Dashboard() {
     const [bookings, setBookings] = useState([]);
@@ -206,6 +207,8 @@ const handleCancelBooking = async (bookingId, serviceName) => {
                   <p>{booking.notes}</p>
                 </div>
               )}
+
+              <WellnessTips serviceName={booking.service.name} />
 
               <div className="booking-card__actions">
                 <Link

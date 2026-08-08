@@ -280,3 +280,45 @@
     width: 100%;
   }
 }
+
+
+.wellness-tips {
+  margin-top: 1rem;
+  padding: 1.2rem;
+  border: 1px solid rgba(53, 94, 59, 0.12);
+  border-radius: 18px;
+  background: #eef3e9;
+}
+
+.wellness-tips__eyebrow {
+  margin-bottom: 0.35rem;
+  color: #72866f;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+}
+
+.wellness-tips h4 {
+  margin-bottom: 0.6rem;
+  color: #355e3b;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.45rem;
+}
+
+.wellness-tips__intro {
+  margin-bottom: 0.8rem;
+  color: #667168;
+  line-height: 1.55;
+}
+
+.wellness-tips ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.wellness-tips li {
+  margin-bottom: 0.55rem;
+  color: #49594d;
+  line-height: 1.55;
+}

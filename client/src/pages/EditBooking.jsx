@@ -39,6 +39,7 @@ function EditBooking() {
         }
 
         setBooking(data.booking);
+        setBookingCreated(true);
 
         setFormData({
           firstName: data.booking.contact.firstName,
@@ -109,7 +110,7 @@ function EditBooking() {
       }
 
       setMessage("Appointment updated successfully!");
-      navigate("/dashboard");
+      //navigate("/dashboard");
     } catch (error) {
       console.error(error);
       setMessage(error.message);
@@ -117,6 +118,29 @@ function EditBooking() {
       setIsSaving(false);
     }
   };
+
+if (bookingCreated) {
+  return (
+    <main className="booking-success">
+      <h1>Booking Confirmed! 🌿</h1>
+
+      <p>
+        Your {service.name} appointment has been created successfully.
+      </p>
+
+      <WellnessTips serviceName={service.name} />
+
+      <button
+        className="button button--primary"
+        type="button"
+        onClick={() => navigate("/dashboard")}
+      >
+        View My Appointments
+      </button>
+    </main>
+  );
+}
+
 
   if (!booking) {
     return <h2>{message || "Loading appointment..."}</h2>;
