@@ -8,6 +8,8 @@ const connectDB = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
 const serviceRoutes = require("./routes/serviceRoutes");
 const bookingRoutes = require("./routes/bookingRoutes");
+const aiRoutes = require("./routes/aiRoutes");
+
 
 //Create Express App
 const app = express();
@@ -25,6 +27,8 @@ app.use("/api/auth", authRoutes);
 app.use("/api/services", serviceRoutes);
 
 app.use("/api/bookings", bookingRoutes);
+
+app.use("/api/ai", aiRoutes);
 
 
 //First route

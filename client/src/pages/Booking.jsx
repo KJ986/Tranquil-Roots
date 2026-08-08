@@ -107,7 +107,10 @@ function Booking() {
           Your {service.name} appointment has been created successfully.
         </p>
 
-        <WellnessTips serviceName={service.name} />
+        <WellnessTips serviceName={service.name}
+        category={service.category}
+        notes={formData.notes}
+        />
 
         <button
           className="button button--primary"

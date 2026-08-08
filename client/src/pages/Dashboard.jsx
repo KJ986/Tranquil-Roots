@@ -208,7 +208,10 @@ const handleCancelBooking = async (bookingId, serviceName) => {
                 </div>
               )}
 
-              <WellnessTips serviceName={booking.service.name} />
+              <WellnessTips serviceName={booking.service.name}
+              category={booking.service.category}
+              notes={booking.notes}
+              />
 
               <div className="booking-card__actions">
                 <Link

@@ -1,10 +1,67 @@
-function WellnessTips({ serviceName }) {
-  const tips = [
-    "Stay hydrated before your appointment.",
-    "Avoid heavy styling products 24 hours beforehand.",
-    "Massage your scalp gently the night before.",
-    "Get plenty of rest before your visit.",
-  ];
+import { useEffect, useState } from "react";
+
+function WellnessTips({ serviceName, category, notes }) {
+  const [tips, setTips] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const fetchWellnessTips = async () => {
+      try {
+        setLoading(true);
+        setError("");
+
+        const response = await fetch(
+          "http://localhost:5000/api/ai/wellness-tips",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              serviceName,
+              category,
+              notes,
+            }),
+          }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(
+            data.message || "Unable to generate wellness tips."
+          );
+        }
+
+        setTips(data.tips);
+      } catch (error) {
+        console.error(error);
+
+        setError("Wellness tips are temporarily unavailable.");
+
+        setTips([
+          "Stay hydrated before your appointment.",
+          "Keep your wellness routine gentle before your visit.",
+          "Give yourself time to relax before your appointment.",
+          "Get plenty of rest the night before.",
+        ]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchWellnessTips();
+  }, [serviceName, category, notes]);
+
+  if (loading) {
+    return (
+      <section className="wellness-tips">
+        <h4>🌿 AI Wellness Guide</h4>
+        <p>Creating your personalized wellness tips...</p>
+      </section>
+    );
+  }
 
   return (
     <section className="wellness-tips">
@@ -17,6 +74,12 @@ function WellnessTips({ serviceName }) {
       <p className="wellness-tips__intro">
         Helpful tips for your upcoming {serviceName} appointment:
       </p>
+
+      {error && (
+        <p className="wellness-tips__error">
+          {error}
+        </p>
+      )}
 
       <ul>
         {tips.map((tip, index) => (
