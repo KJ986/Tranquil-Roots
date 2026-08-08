@@ -5,11 +5,33 @@ import WellnessTips from "../components/WellnessTips";
 
 function Dashboard() {
     const [bookings, setBookings] = useState([]);
+    const [user, setUser] = useState(null);
 
     useEffect(() => {
         const fetchBookings = async () => {
             try {
                 const token = localStorage.getItem("token");
+
+                    // Fetch logged-in user
+                    const userResponse = await fetch(
+  "http://localhost:5000/api/auth/me",
+  {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+);
+
+const userData = await userResponse.json();
+console.log("Current user:", userData);
+
+if (!userResponse.ok) {
+  throw new Error(
+    userData.message || "Unable to load user."
+  );
+}
+
+setUser(userData.user);
 
                 console.log("Saved token:", token);
 
@@ -21,6 +43,8 @@ function Dashboard() {
                         },
                     }
                 );
+
+
 
                 const data = await response.json();
 
@@ -62,6 +86,7 @@ const handleCancelBooking = async (bookingId, serviceName) => {
       }
     );
 
+
     const data = await response.json();
 
     if (!response.ok) {
@@ -81,6 +106,20 @@ const handleCancelBooking = async (bookingId, serviceName) => {
   }
 };
 
+const getGreeting = () => {
+  const hour = new Date().getHours();
+
+  if (hour < 12) {
+    return "Good Morning";
+  }
+
+  if (hour < 18) {
+    return "Good Afternoon";
+  }
+
+  return "Good Evening";
+};
+
 
  return (
     
@@ -88,7 +127,7 @@ const handleCancelBooking = async (bookingId, serviceName) => {
     <section className="dashboard-hero">
       <p className="dashboard-eyebrow">Your wellness dashboard</p>
 
-      <h1>🍃 Good Afternoon, KJ</h1>
+      <h1>🍃 {getGreeting()}, {user?.firstName || "Guest"} </h1>
 
       <p className="dashboard-subtitle">
         Here's your upcoming wellness journey.

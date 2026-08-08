@@ -16,6 +16,12 @@ router.get("/test", (req, res) => {
   });
 });
 
+router.get("/me", protect, async (req,res) => {
+    res.status(200).json({
+        user: req.user,
+    });
+});
+
 router.post("/register", registerUser);
 router.post("/login", loginUser);
 router.get("/profile", protect, getProfile);
