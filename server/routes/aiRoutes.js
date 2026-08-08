@@ -64,5 +64,5 @@ Write one tip per line.
     });
   }
 });
-
+ 
 module.exports = router;
