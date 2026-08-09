@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import "../styles/ServiceDetails.css"
 
 function ServiceDetails() {
   const { id } = useParams();
@@ -32,31 +33,58 @@ function ServiceDetails() {
     return <h2>Loading...</h2>;
   }
 
-  return (
-    <div className="service-details">
+ return (
+  <main className="service-details-page">
+    <section className="service-details-card">
+      <div className="service-details__intro">
+        <p className="service-details__eyebrow">
+          {service.category}
+        </p>
 
-      <h1>{service.name}</h1>
+        <h1>{service.name}</h1>
 
-      <p>{service.description}</p>
+        <p className="service-details__description">
+          {service.description}
+        </p>
+      </div>
 
-      <p>
-        <strong>Duration:</strong> {service.duration} minutes
-      </p>
+      <div className="service-details__meta">
+        <div>
+          <span>Duration</span>
+          <strong>{service.duration} minutes</strong>
+        </div>
 
-      <p>
-        <strong>Category:</strong> {service.category}
-      </p>
+        {service.price && (
+          <div>
+            <span>Price</span>
+            <strong>${service.price}</strong>
+          </div>
+        )}
 
-      <Link 
-      className="button button--primary"
-      to={`/book/${service._id}`}
-      > 
-      Book Appointment
+        <div>
+          <span>Category</span>
+          <strong>{service.category}</strong>
+        </div>
+      </div>
 
-      </Link>
+      <div className="service-details__actions">
+        <Link
+          className="button button--primary"
+          to={`/book/${service._id}`}
+        >
+          Book Appointment
+        </Link>
 
-    </div>
-  );
+        <Link
+          className="button button--secondary"
+          to="/services"
+        >
+          Back to Services
+        </Link>
+      </div>
+    </section>
+  </main>
+);
 }
 
 export default ServiceDetails;

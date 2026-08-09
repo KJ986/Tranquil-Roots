@@ -1,0 +1,147 @@
+.booking-page {
+  min-height: 100vh;
+  padding: 4rem 6%;
+  display: flex;
+  justify-content: center;
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(107, 142, 110, 0.14),
+      transparent 30%
+    ),
+    #f8f5f0;
+}
+
+.booking-card {
+  width: 100%;
+  max-width: 900px;
+  padding: 3rem;
+  border: 1px solid rgba(53, 94, 59, 0.12);
+  border-radius: 30px;
+  background: #fffdf9;
+  box-shadow: 0 22px 55px rgba(45, 68, 51, 0.1);
+}
+
+.booking-eyebrow {
+  margin-bottom: 0.7rem;
+  color: #6b8e6e;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14rem;
+  text-transform: uppercase;
+}
+
+.booking-card__header h1 {
+  margin-bottom: 0.8rem;
+  color: #355e3b;
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(3rem, 7vw, 4.8rem);
+  line-height: 1;
+}
+
+.booking-subtitle {
+  max-width: 680px;
+  color: #707a71;
+  line-height: 1.7;
+}
+
+.booking-service-summary {
+  margin: 2.2rem 0;
+  padding: 1.5rem;
+  border-radius: 20px;
+  background: #eef3e9;
+}
+
+.booking-service-summary span {
+  color: #7e8b7c;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.09rem;
+  text-transform: uppercase;
+}
+
+.booking-service-summary h2 {
+  margin: 0.3rem 0 1rem;
+  color: #355e3b;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 2rem;
+}
+
+.booking-service-meta {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.booking-service-meta p {
+  margin: 0;
+  color: #59665c;
+}
+
+.booking-service-meta strong {
+  display: block;
+  margin-bottom: 0.2rem;
+  color: #889286;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+}
+
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+}
+
+.booking-form__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.2rem;
+}
+
+.booking-form textarea {
+  width: 100%;
+  resize: vertical;
+  padding: 0.95rem 1rem;
+  border: 1px solid #d8dfd5;
+  border-radius: 14px;
+  background: white;
+  color: #344039;
+  font: inherit;
+  outline: none;
+}
+
+.booking-form textarea:focus {
+  border-color: #6b8e6e;
+  box-shadow: 0 0 0 3px rgba(107, 142, 110, 0.13);
+}
+
+.booking-message {
+  margin: 0;
+  padding: 0.9rem 1rem;
+  border-radius: 12px;
+  background: #f3e4e1;
+  color: #8b4943;
+}
+
+.booking-submit {
+  align-self: flex-start;
+  min-width: 190px;
+}
+
+@media (max-width: 700px) {
+  .booking-page {
+    padding: 3rem 5%;
+  }
+
+  .booking-card {
+    padding: 2rem 1.4rem;
+  }
+
+  .booking-form__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .booking-submit {
+    width: 100%;
+  }
+}

@@ -1,0 +1,147 @@
+.services-page {
+  min-height: 100vh;
+  padding: 4rem 6%;
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(107, 142, 110, 0.14),
+      transparent 30%
+    ),
+    #f8f5f0;
+}
+
+.services-hero {
+  max-width: 760px;
+  margin-bottom: 3rem;
+}
+
+.services-eyebrow {
+  margin-bottom: 0.7rem;
+  color: #6b8e6e;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16rem;
+  text-transform: uppercase;
+}
+
+.services-hero h1 {
+  margin-bottom: 0.9rem;
+  color: #355e3b;
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  line-height: 1;
+}
+
+.services-subtitle {
+  color: #707a71;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.service-card {
+  display: flex;
+  min-height: 340px;
+  border: 1px solid rgba(53, 94, 59, 0.11);
+  border-radius: 26px;
+  background: #fffdf9;
+  box-shadow: 0 18px 42px rgba(45, 68, 51, 0.08);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 50px rgba(45, 68, 51, 0.12);
+}
+
+.service-card__content {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  padding: 1.8rem;
+}
+
+.service-card__category {
+  margin-bottom: 0.45rem;
+  color: #83907f;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+}
+
+.service-card h2 {
+  margin-bottom: 0.85rem;
+  color: #355e3b;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 2rem;
+}
+
+.service-card__description {
+  flex: 1;
+  color: #6c756d;
+  line-height: 1.65;
+}
+
+.service-card__meta {
+  display: flex;
+  gap: 2rem;
+  margin: 1.4rem 0;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(53, 94, 59, 0.1);
+}
+
+.service-card__meta span {
+  color: #59665c;
+  font-size: 0.9rem;
+}
+
+.service-card__meta strong {
+  display: block;
+  margin-bottom: 0.2rem;
+  color: #8a9288;
+  font-size: 0.7rem;
+  letter-spacing: 0.07rem;
+  text-transform: uppercase;
+}
+
+.services-empty {
+  padding: 3rem;
+  border: 1px dashed rgba(53, 94, 59, 0.25);
+  border-radius: 24px;
+  background: #fffdf9;
+  text-align: center;
+}
+
+.services-empty h2 {
+  color: #355e3b;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 2rem;
+}
+
+.services-empty p {
+  color: #737c74;
+}
+
+@media (max-width: 1000px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 650px) {
+  .services-page {
+    padding: 3rem 5%;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+}

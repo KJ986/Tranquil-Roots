@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import "../styles/Services.css";
 
 function Services() {
   const [services, setServices] = useState([]);
@@ -23,33 +24,70 @@ function Services() {
   }, []);
 
   return (
-    <div className="services-page">
+  <main className="services-page">
+    <section className="services-hero">
+      <p className="services-eyebrow">
+        Restore • Relax • Renew
+      </p>
+
       <h1>Our Services</h1>
 
-      {services.map((service) => (
-        <div key={service._id} className="service-card">
-          <h2>{service.name}</h2>
+      <p className="services-subtitle">
+        Explore restorative head spa and wellness experiences designed
+        to help you slow down, reset, and feel renewed.
+      </p>
+    </section>
 
-          <p>{service.description}</p>
-
-          <p>
-            <strong>Duration:</strong> {service.duration} minutes
-          </p>
-
-          <p>
-            <strong>Category:</strong> {service.category}
-          </p>
-
-          <Link
-            className="button button--primary"
-            to={`/services/${service._id}`}
+    {services.length === 0 ? (
+      <div className="services-empty">
+        <h2>No services available yet</h2>
+        <p>Please check back soon for new wellness experiences.</p>
+      </div>
+    ) : (
+      <section className="services-grid">
+        {services.map((service) => (
+          <article
+            key={service._id}
+            className="service-card"
           >
-            View Details
-          </Link>
-        </div>
-      ))}
-    </div>
-  );
+            <div className="service-card__content">
+              <p className="service-card__category">
+                {service.category}
+              </p>
+
+              <h2>{service.name}</h2>
+
+              <p className="service-card__description">
+                {service.description}
+              </p>
+
+              <div className="service-card__meta">
+                <span>
+                  <strong>Duration</strong>
+                  {service.duration} min
+                </span>
+
+                {service.price && (
+                  <span>
+                    <strong>Price</strong>
+                    ${service.price}
+                  </span>
+                )}
+              </div>
+
+              <Link
+                className="button button--primary"
+                to={`/services/${service._id}`}
+              >
+                View Details
+              </Link>
+            </div>
+          </article>
+        ))}
+      </section>
+    )}
+  </main>
+);
 }
 
 export default Services;
