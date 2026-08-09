@@ -1,5 +1,9 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import "../styles/Auth.css";
+import {
+  Link,
+  useNavigate
+} from "react-router-dom";
 
 function Login() {
   const navigate = useNavigate();
@@ -61,17 +65,28 @@ function Login() {
     }
   };
 
-  return (
-    <main className="login-page">
-      <h1>Welcome Back</h1>
-
-      <p>
-        Sign in to continue your Tranquil Roots wellness journey.
+ 
+    return (
+  <main className="auth-page">
+    <section className="auth-card">
+      <p className="auth-eyebrow">
+        Welcome to Tranquil Roots
       </p>
 
-      <form onSubmit={handleSubmit}>
+      <h1>Welcome Back</h1>
+
+      <p className="auth-subtitle">
+        Sign in to continue your wellness journey.
+      </p>
+
+      <form
+        className="auth-form"
+        onSubmit={handleSubmit}
+      >
         <div className="form-group">
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">
+            Email
+          </label>
 
           <input
             id="email"
@@ -79,12 +94,15 @@ function Login() {
             name="email"
             value={formData.email}
             onChange={handleChange}
+            placeholder="you@example.com"
             required
           />
         </div>
 
         <div className="form-group">
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">
+            Password
+          </label>
 
           <input
             id="password"
@@ -92,22 +110,38 @@ function Login() {
             name="password"
             value={formData.password}
             onChange={handleChange}
+            placeholder="Enter your password"
             required
           />
         </div>
 
-        {message && <p>{message}</p>}
+        {message && (
+          <p className="auth-message">
+            {message}
+          </p>
+        )}
 
         <button
-          className="button button--primary"
+          className="button button--primary auth-submit"
           type="submit"
           disabled={isLoading}
         >
           {isLoading ? "Signing In..." : "Sign In"}
         </button>
       </form>
-    </main>
-  );
+
+      <p className="auth-switch">
+        New to Tranquil Roots?{" "}
+        <Link to="/register">
+    Create an account
+  </Link>
+          Create an account
+    
+      </p>
+    </section>
+  </main>
+);
+  
 }
 
 export default Login;
