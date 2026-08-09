@@ -11,6 +11,16 @@ const createBooking = async (req, res) => {
         contact,
      } = req.body;
 
+     //Make sure appt is in the future
+     const selectedDate = new Date(appointmentDate);
+
+     if (selectedDate <= new Date()) {
+        return res.status(400).json({
+            message: "Appointment date must be in the future."
+        });
+     }
+
+     // Contact validation
      if (
         !contact ||
         !contact.firstName ||
@@ -120,6 +130,15 @@ const getBookingById = async (req, res) => {
     //Update a Booking
     const updateBooking = async (req, res) => {
         try { 
+            if (req.body.appointmentDate) {
+  const selectedDate = new Date(req.body.appointmentDate);
+
+  if (selectedDate <= new Date()) {
+    return res.status(400).json({
+      message: "Appointment date must be in the future.",
+    });
+  }
+}
             const booking = await Booking.findByIdAndUpdate(
                 {
                     _id: req.params.id,
@@ -151,7 +170,7 @@ const getBookingById = async (req, res) => {
             });
         }
     };
-    
+
 
  // Delete a booking that belongs to the logged-in user
 const deleteBooking = async (req, res) => {
