@@ -8,6 +8,16 @@ function OwnerDashboard() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  const [editingServiceId, setEditingServiceId] = useState(null);
+
+const [editServiceForm, setEditServiceForm] = useState({
+  name: "",
+  description: "",
+  duration: "",
+  price: "",
+  category: "Head Spa",
+});
+
   const [serviceForm, setServiceForm] = useState({
     name: "",
     description: "",
@@ -203,6 +213,74 @@ const handleToggleService = async (service) => {
   }
 };
 
+// React remeembers specific service on edit mode
+const handleEditServiceClick = (service) => {
+  setEditingServiceId(service._id);
+
+  setEditServiceForm({
+    name: service.name,
+    description: service.description,
+    duration: service.duration,
+    price: service.price,
+    category: service.category,
+  });
+};
+
+
+const handleEditServiceChange = (event) => {
+  const { name, value } = event.target;
+
+  setEditServiceForm((previousData) => ({
+    ...previousData,
+    [name]: value,
+  }));
+};
+
+// Save function
+const handleSaveService = async (serviceId) => {
+  try {
+    const token = localStorage.getItem("token");
+
+    const response = await fetch(
+      `http://localhost:5000/api/services/${serviceId}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          name: editServiceForm.name,
+          description: editServiceForm.description,
+          duration: Number(editServiceForm.duration),
+          price: Number(editServiceForm.price),
+          category: editServiceForm.category,
+        }),
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(
+        data.message || "Unable to update service."
+      );
+    }
+
+    setServices((previousServices) =>
+      previousServices.map((service) =>
+        service._id === serviceId
+          ? data.service
+          : service
+      )
+    );
+
+    setEditingServiceId(null);
+  } catch (error) {
+    console.error("Edit service error:", error);
+    alert(error.message);
+  }
+};
 
   if (loading) {
     return <p>Loading appointments...</p>;
@@ -365,204 +443,156 @@ const handleToggleService = async (service) => {
               : "services"}
           </p>
         </div>
+        </section>
 
         {services.length === 0 ? (
-          <p>No services available.</p>
-        ) : (
-          <div className="owner-service-grid">
-            {services.map((service) => (
-  <article
-    key={service._id}
-    className="owner-service-card"
-  >
-    <p className="owner-eyebrow">
-      {service.category}
-    </p>
-
-    <h3>{service.name}</h3>
-
-    {/* Shows whether customers can currently book this service */}
-    <span
-      className={
-        service.isActive
-          ? "owner-service-status owner-service-status--active"
-          : "owner-service-status owner-service-status--inactive"
-      }
-    >
-      {service.isActive ? "Active" : "Inactive"}
-    </span>
-
-    <p>{service.description}</p>
-
-    <div className="owner-service-meta">
-      <strong>
-        {service.duration} min
-      </strong>
-
-      <span>•</span>
-
-      <strong>
-        ${service.price}
-      </strong>
-    </div>
-
-    {/* Owner can activate or deactivate this specific service */}
-    <button
-      type="button"
-      className="button button--secondary"
-      onClick={() => handleToggleService(service)}
-    >
-      {service.isActive
-        ? "Deactivate Service"
-        : "Activate Service"}
-    </button>
-  </article>
-))}
-          </div>
-        )}
-
-        <div className="owner-section-heading">
-          <div>
-            <p className="owner-eyebrow">
-              Add Service
-            </p>
-
-            <h2>Add a New Service</h2>
-          </div>
-        </div>
-
-        <form
-          className="owner-service-form"
-          onSubmit={handleAddService}
-        >
-          <div className="owner-service-form__grid">
+  <p>No services available.</p>
+) : (
+  <div className="owner-service-grid">
+    {services.map((service) => (
+      <article
+        key={service._id}
+        className="owner-service-card"
+      >
+        {editingServiceId === service._id ? (
+          <div className="owner-service-edit-form">
             <div className="form-group">
-              <label htmlFor="name">
-                Service Name
-              </label>
+              <label>Service Name</label>
 
               <input
-                id="name"
                 type="text"
                 name="name"
-                value={serviceForm.name}
-                onChange={handleServiceChange}
-                required
+                value={editServiceForm.name}
+                onChange={handleEditServiceChange}
               />
             </div>
 
             <div className="form-group">
-              <label htmlFor="category">
-                Category
-              </label>
+              <label>Category</label>
 
               <select
-                id="category"
                 name="category"
-                value={serviceForm.category}
-                onChange={handleServiceChange}
+                value={editServiceForm.category}
+                onChange={handleEditServiceChange}
               >
-                <option value="Head Spa">
-                  Head Spa
-                </option>
-
-                <option value="Treatment">
-                  Treatment
-                </option>
-
-                <option value="Massage">
-                  Massage
-                </option>
-
-                <option value="Wellness">
-                  Wellness
-                </option>
-
-                <option value="Scalp Care">
-                  Scalp Care
-                </option>
+                <option value="Head Spa">Head Spa</option>
+                <option value="Treatment">Treatment</option>
+                <option value="Massage">Massage</option>
+                <option value="Wellness">Wellness</option>
+                <option value="Scalp Care">Scalp Care</option>
               </select>
             </div>
 
             <div className="form-group">
-              <label htmlFor="duration">
-                Duration (minutes)
-              </label>
+              <label>Duration</label>
 
               <input
-                id="duration"
                 type="number"
                 name="duration"
-                min="1"
-                value={serviceForm.duration}
-                onChange={handleServiceChange}
-                required
+                value={editServiceForm.duration}
+                onChange={handleEditServiceChange}
               />
             </div>
 
             <div className="form-group">
-              <label htmlFor="price">
-                Price ($)
-              </label>
+              <label>Price</label>
 
               <input
-                id="price"
                 type="number"
                 name="price"
-                min="0"
-                step="0.01"
-                value={serviceForm.price}
-                onChange={handleServiceChange}
-                required
+                value={editServiceForm.price}
+                onChange={handleEditServiceChange}
               />
             </div>
+
+            <div className="form-group">
+              <label>Description</label>
+
+              <textarea
+                name="description"
+                rows={5}
+                value={editServiceForm.description}
+                onChange={handleEditServiceChange}
+              />
+            </div>
+
+            <div className="owner-service-actions">
+              <button
+                type="button"
+                className="button button--primary"
+                onClick={() =>
+                  handleSaveService(service._id)
+                }
+              >
+                Save Changes
+              </button>
+
+              <button
+                type="button"
+                className="button button--secondary"
+                onClick={() => setEditingServiceId(null)}
+              >
+                Cancel
+              </button>
+            </div>
           </div>
-
-          <div className="form-group">
-            <label htmlFor="description">
-              Description
-            </label>
-
-            <textarea
-              id="description"
-              name="description"
-              rows={5}
-              value={serviceForm.description}
-              onChange={handleServiceChange}
-              required
-            />
-          </div>
-
-          <label className="owner-service-active">
-            <input
-              type="checkbox"
-              name="isActive"
-              checked={serviceForm.isActive}
-              onChange={handleServiceChange}
-            />
-
-            Make this service available to customers
-          </label>
-
-          {serviceMessage && (
-            <p className="owner-service-message">
-              {serviceMessage}
+        ) : (
+          <>
+            <p className="owner-eyebrow">
+              {service.category}
             </p>
-          )}
 
-          <button
-            className="button button--primary"
-            type="submit"
-            disabled={isAddingService}
-          >
-            {isAddingService
-              ? "Adding Service..."
-              : "Add Service"}
-          </button>
-        </form>
-      </section>
-    </main>
+            <h3>{service.name}</h3>
+
+            <span
+              className={
+                service.isActive
+                  ? "owner-service-status owner-service-status--active"
+                  : "owner-service-status owner-service-status--inactive"
+              }
+            >
+              {service.isActive ? "Active" : "Inactive"}
+            </span>
+
+            <p>{service.description}</p>
+
+            <div className="owner-service-meta">
+              <strong>{service.duration} min</strong>
+              <span>•</span>
+              <strong>${service.price}</strong>
+            </div>
+
+            <div className="owner-service-actions">
+              <button
+                type="button"
+                className="button button--primary"
+                onClick={() =>
+                  handleEditServiceClick(service)
+                }
+              >
+                Edit Service
+              </button>
+
+              <button
+                type="button"
+                className="button button--secondary"
+                onClick={() =>
+                  handleToggleService(service)
+                }
+              >
+                {service.isActive
+                  ? "Deactivate Service"
+                  : "Activate Service"}
+              </button>
+            </div>
+          </>
+        )}
+      </article>
+    ))}
+  </div>
+)}
+
+</main>
   );
 }
-
-export default OwnerDashboard;
+ export default OwnerDashboard; 
