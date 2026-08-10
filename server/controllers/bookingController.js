@@ -225,6 +225,57 @@ const getAllBookings = async (req, res) => {
   }
 };
 
+// Owner updates booking status
+const updateBookingStatus = async (req, res) => {
+  try {
+    const { status } = req.body;
+
+    const allowedStatuses = [
+      "pending",
+      "confirmed",
+      "completed",
+      "cancelled",
+    ];
+
+    if (!allowedStatuses.includes(status)) {
+      return res.status(400).json({
+        message: "Invalid booking status.",
+      });
+    }
+
+    const booking = await Booking.findByIdAndUpdate(
+      req.params.id,
+      {
+        status,
+      },
+      {
+        new: true,
+        runValidators: true,
+      }
+    )
+      .populate("user", "firstName lastName email")
+      .populate("service", "name duration price category");
+
+    if (!booking) {
+      return res.status(404).json({
+        message: "Booking not found.",
+      });
+    }
+
+    res.status(200).json({
+      message: "Booking status updated successfully!",
+      booking,
+    });
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      message: "Server error.",
+    });
+  }
+};
+
+
 module.exports = {
   createBooking,
   getBookings,
@@ -232,4 +283,5 @@ module.exports = {
   updateBooking,
   deleteBooking,
   getAllBookings,
+  updateBookingStatus,
 };

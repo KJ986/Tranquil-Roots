@@ -282,6 +282,46 @@ const handleSaveService = async (serviceId) => {
   }
 };
 
+
+const handleStatusChange = async (bookingId, newStatus) => {
+  try {
+    const token = localStorage.getItem("token");
+
+    const response = await fetch(
+      `http://localhost:5000/api/bookings/owner/${bookingId}/status`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          status: newStatus,
+        }),
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(
+        data.message || "Unable to update booking status."
+      );
+    }
+
+    setBookings((previousBookings) =>
+      previousBookings.map((booking) =>
+        booking._id === bookingId
+          ? data.booking
+          : booking
+      )
+    );
+  } catch (error) {
+    console.error("Status update error:", error);
+    alert(error.message);
+  }
+};
+
   if (loading) {
     return <p>Loading appointments...</p>;
   }
@@ -413,6 +453,29 @@ const handleSaveService = async (serviceId) => {
                     </strong>
                   </p>
                 </div>
+
+                //Status dropdown
+                <div className="form-group">
+  <label htmlFor={`status-${booking._id}`}>
+    Appointment Status
+  </label>
+
+  <select
+    id={`status-${booking._id}`}
+    value={booking.status}
+    onChange={(event) =>
+      handleStatusChange(
+        booking._id,
+        event.target.value
+      )
+    }
+  >
+    <option value="pending">Pending</option>
+    <option value="confirmed">Confirmed</option>
+    <option value="completed">Completed</option>
+    <option value="cancelled">Cancelled</option>
+  </select>
+</div>
 
                 {booking.notes && (
                   <div className="owner-booking-notes">

@@ -12,6 +12,7 @@ const {
   updateBooking,
   deleteBooking,
   getAllBookings,
+  updateBookingStatus,
 } = require("../controllers/bookingController");
 
 router.post("/", protect, createBooking);
@@ -23,6 +24,13 @@ router.get(
   protect,
   ownerOnly,
   getAllBookings
+);
+
+router.put(
+  "/owner/:id/status",
+  protect,
+  ownerOnly,
+  updateBookingStatus
 );
 
 router.get("/:id", protect, getBookingById);
