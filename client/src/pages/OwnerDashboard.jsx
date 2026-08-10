@@ -454,7 +454,7 @@ const handleStatusChange = async (bookingId, newStatus) => {
                   </p>
                 </div>
 
-                //Status dropdown
+                
                 <div className="form-group">
   <label htmlFor={`status-${booking._id}`}>
     Appointment Status
@@ -654,6 +654,132 @@ const handleStatusChange = async (bookingId, newStatus) => {
     ))}
   </div>
 )}
+
+<div className="owner-section-heading">
+  <div>
+    <p className="owner-eyebrow">
+      Add Service
+    </p>
+
+    <h2>Add a New Service</h2>
+  </div>
+</div>
+
+<form
+  className="owner-service-form"
+  onSubmit={handleAddService}
+>
+  <div className="owner-service-form__grid">
+    <div className="form-group">
+      <label htmlFor="name">
+        Service Name
+      </label>
+
+      <input
+        id="name"
+        type="text"
+        name="name"
+        value={serviceForm.name}
+        onChange={handleServiceChange}
+        required
+      />
+    </div>
+
+    <div className="form-group">
+      <label htmlFor="category">
+        Category
+      </label>
+
+      <select
+        id="category"
+        name="category"
+        value={serviceForm.category}
+        onChange={handleServiceChange}
+      >
+        <option value="Head Spa">Head Spa</option>
+        <option value="Treatment">Treatment</option>
+        <option value="Massage">Massage</option>
+        <option value="Wellness">Wellness</option>
+        <option value="Scalp Care">Scalp Care</option>
+      </select>
+    </div>
+
+    <div className="form-group">
+      <label htmlFor="duration">
+        Duration (minutes)
+      </label>
+
+      <input
+        id="duration"
+        type="number"
+        name="duration"
+        min="1"
+        value={serviceForm.duration}
+        onChange={handleServiceChange}
+        required
+      />
+    </div>
+
+    <div className="form-group">
+      <label htmlFor="price">
+        Price ($)
+      </label>
+
+      <input
+        id="price"
+        type="number"
+        name="price"
+        min="0"
+        step="0.01"
+        value={serviceForm.price}
+        onChange={handleServiceChange}
+        required
+      />
+    </div>
+  </div>
+
+  <div className="form-group">
+    <label htmlFor="description">
+      Description
+    </label>
+
+    <textarea
+      id="description"
+      name="description"
+      rows={5}
+      value={serviceForm.description}
+      onChange={handleServiceChange}
+      required
+    />
+  </div>
+
+  <label className="owner-service-active">
+    <input
+      type="checkbox"
+      name="isActive"
+      checked={serviceForm.isActive}
+      onChange={handleServiceChange}
+    />
+
+    Make this service available to customers
+  </label>
+
+  {serviceMessage && (
+    <p className="owner-service-message">
+      {serviceMessage}
+    </p>
+  )}
+
+  <button
+    className="button button--primary"
+    type="submit"
+    disabled={isAddingService}
+  >
+    {isAddingService
+      ? "Adding Service..."
+      : "Add Service"}
+  </button>
+</form>
 
 </main>
   );
