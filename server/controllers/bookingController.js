@@ -139,7 +139,7 @@ const getBookingById = async (req, res) => {
     });
   }
 }
-            const booking = await Booking.findByIdAndUpdate(
+            const booking = await Booking.findOneAndUpdate(
                 {
                     _id: req.params.id,
                     user: req.user._id,
@@ -204,10 +204,32 @@ const deleteBooking = async (req, res) => {
   }
 };
 
+// Get all bookings for the ownwer
+const getAllBookings = async (req, res) => {
+  try {
+    const bookings = await Booking.find()
+    .populate("user", "firstName lastName email")
+    .populate("service", "name duration price category")
+    .sort({ appointmentDate: 1 });
+
+    res.status(200).json({
+      count: bookings.length,
+      bookings,
+    });
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      message: "Server error.",
+    });
+  }
+};
+
 module.exports = {
   createBooking,
   getBookings,
   getBookingById,
   updateBooking,
   deleteBooking,
+  getAllBookings,
 };

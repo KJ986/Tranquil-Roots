@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ProtectedRoute from "./components/ProtectedRoute";
+import OwnerDashboard from "./pages/OwnerDashboard";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -59,6 +60,15 @@ function App() {
                 <EditBooking />
               </ProtectedRoute>
             }
+          />
+
+          <Route
+        path="/owner"
+          element={
+          <ProtectedRoute>
+          <OwnerDashboard />
+          </ProtectedRoute>
+          }
           />
 
           <Route path="*" element={<NotFound />} />

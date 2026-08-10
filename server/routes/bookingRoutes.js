@@ -1,22 +1,34 @@
 const express = require("express");
 const router = express.Router();
 
+const { protect } = require("../middleware/authMiddleware");
+const ownerOnly = require("../middleware/ownerOnly");
+
+
 const {
-  createBooking, 
+  createBooking,
   getBookings,
   getBookingById,
   updateBooking,
   deleteBooking,
+  getAllBookings,
 } = require("../controllers/bookingController");
 
-const {
-  protect,
-} = require("../middleware/authMiddleware");
-
 router.post("/", protect, createBooking);
+
 router.get("/", protect, getBookings);
+
+router.get(
+  "/owner/all",
+  protect,
+  ownerOnly,
+  getAllBookings
+);
+
 router.get("/:id", protect, getBookingById);
+
 router.put("/:id", protect, updateBooking);
+
 router.delete("/:id", protect, deleteBooking);
 
 module.exports = router;

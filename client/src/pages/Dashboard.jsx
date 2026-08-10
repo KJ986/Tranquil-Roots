@@ -3,6 +3,7 @@ import "../styles/Dashboard.css";
 import { Link } from "react-router-dom";
 import WellnessTips from "../components/WellnessTips";
 
+
 function Dashboard() {
     const [bookings, setBookings] = useState([]);
     const [user, setUser] = useState(null);

@@ -1,4 +1,6 @@
+import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+
 import logo from "../assets/tranquil-roots-logo.png";
 import "../styles/Navbar.css";
 
@@ -7,14 +9,55 @@ function Navbar() {
 
   const token = localStorage.getItem("token");
 
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const fetchCurrentUser = async () => {
+      if (!token) {
+        setUser(null);
+        return;
+      }
+
+      try {
+        const response = await fetch(
+          "http://localhost:5000/api/auth/me",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(
+            data.message || "Unable to load user."
+          );
+        }
+
+        setUser(data.user);
+      } catch (error) {
+        console.error("Navbar user error:", error);
+        setUser(null);
+      }
+    };
+
+    fetchCurrentUser();
+  }, [token]);
+
   const handleLogout = () => {
     localStorage.removeItem("token");
+    setUser(null);
     navigate("/login");
   };
 
   return (
     <header className="navbar">
-      <NavLink to="/" className="navbar__brand">
+      <NavLink
+        to="/"
+        className="navbar__brand"
+      >
         <img
           src={logo}
           alt="Tranquil Roots logo"
@@ -46,9 +89,15 @@ function Navbar() {
 
         {token ? (
           <>
-            <NavLink to="/dashboard">
-              Dashboard
-            </NavLink>
+            {user?.role === "owner" ? (
+              <NavLink to="/owner">
+                Owner Dashboard
+              </NavLink>
+            ) : (
+              <NavLink to="/dashboard">
+                Dashboard
+              </NavLink>
+            )}
 
             <button
               type="button"

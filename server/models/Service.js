@@ -27,6 +27,7 @@ const serviceSchema = new mongoose.Schema(
             "Treatment",
             "Massage",
             "Wellness",
+            "Scalp Care",
         ],
     },
 
