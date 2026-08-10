@@ -14,26 +14,35 @@ function Navbar() {
 
   return (
     <header className="navbar">
-      <div className="navbar__brand">
+      <NavLink to="/" className="navbar__brand">
         <img
           src={logo}
           alt="Tranquil Roots logo"
           className="navbar__logo"
         />
 
-        <div>
-          <h1>Tranquil Roots</h1>
-          <p>HEAD SPA & WELLNESS</p>
+        <div className="navbar__brand-text">
+          <span className="navbar__name">
+            Tranquil Roots
+          </span>
+
+          <span className="navbar__tagline">
+            Head Spa & Wellness
+          </span>
         </div>
-      </div>
+      </NavLink>
 
       <nav
         className="navbar__links"
         aria-label="Main navigation"
       >
-        <NavLink to="/">Home</NavLink>
+        <NavLink to="/">
+          Home
+        </NavLink>
 
-        <NavLink to="/services">Services</NavLink>
+        <NavLink to="/services">
+          Services
+        </NavLink>
 
         {token ? (
           <>
@@ -43,7 +52,7 @@ function Navbar() {
 
             <button
               type="button"
-              className="nav-logout"
+              className="navbar__logout"
               onClick={handleLogout}
             >
               Logout

@@ -247,7 +247,9 @@ const getGreeting = () => {
                 </div>
               )}
 
-              <WellnessTips serviceName={booking.service.name}
+              <WellnessTips
+              bookingId={booking._id}
+              serviceName={booking.service.name}
               category={booking.service.category}
               notes={booking.notes}
               />

@@ -1,15 +1,22 @@
 import { useEffect, useState } from "react";
 
-function WellnessTips({ serviceName, category, notes }) {
+function WellnessTips({ serviceName, category, notes, bookingId, } = req.body) {
   const [tips, setTips] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+ 
 
   useEffect(() => {
     const fetchWellnessTips = async () => {
       try {
         setLoading(true);
         setError("");
+
+         console.log("Sending AI request:", {
+        serviceName,
+        category,
+        notes,
+      });
 
         const response = await fetch(
           "http://localhost:5000/api/ai/wellness-tips",
@@ -22,11 +29,17 @@ function WellnessTips({ serviceName, category, notes }) {
               serviceName,
               category,
               notes,
+              bookingId,
             }),
           }
         );
 
+          console.log("AI response status:", response.status);
+
         const data = await response.json();
+
+         console.log("AI response body:", data);
+
 
         if (!response.ok) {
           throw new Error(
@@ -62,6 +75,8 @@ function WellnessTips({ serviceName, category, notes }) {
       </section>
     );
   }
+
+  
 
   return (
     <section className="wellness-tips">

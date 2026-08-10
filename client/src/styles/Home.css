@@ -67,10 +67,10 @@
 }
 
 .hero h1 {
-  margin-bottom: 1.3rem;
-  color: #2c4b32;
-  font-size: clamp(3rem, 8vw, 6.5rem);
+  font-size: clamp(3rem, 8vw, 7rem);
   line-height: 0.95;
+  max-width: 100%;
+  overflow-wrap: break-word;
 }
 
 .hero__description {
@@ -189,5 +189,34 @@
     margin-right: 4%;
     margin-left: 4%;
     padding: 2rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .hero {
+    min-height: auto;
+    padding: 3rem 1.25rem;
+  }
+
+  .hero-content {
+    width: 100%;
+    max-width: 100%;
+    text-align: left;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.8rem, 14vw, 4.5rem);
+    line-height: 0.95;
+  }
+
+  .hero p {
+    max-width: 100%;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .hero .button {
+    width: 100%;
+    max-width: 320px;
   }
 }

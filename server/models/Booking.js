@@ -2,6 +2,12 @@ const mongoose = require("mongoose");
 
 const bookingSchema = new mongoose.Schema(
   {
+wellnessTips: [
+  {
+    type: String,
+  },
+],
+
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
@@ -65,6 +71,8 @@ const bookingSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+
+
 
 const Booking = mongoose.model("Booking", bookingSchema);
 

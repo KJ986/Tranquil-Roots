@@ -25,7 +25,7 @@ function Home() {
           </p>
 
           <div className="hero__buttons">
-            <Link className="button button--primary" to="/booking">
+            <Link className="button button--primary" to="/services">
               Book an Appointment
             </Link>
 

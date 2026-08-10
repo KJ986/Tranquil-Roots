@@ -1,5 +1,5 @@
 const express = require("express");
-
+const Booking = require("../models/Booking");
 const router = express.Router();
 
 router.post("/wellness-tips", async (req, res) => {
@@ -21,6 +21,24 @@ router.post("/wellness-tips", async (req, res) => {
         message: "Service name and category are required.",
       });
     }
+
+    // Check MongoDB for previously generated tips
+if (bookingId) {
+  const existingBooking = await Booking.findById(bookingId);
+
+  if (
+    existingBooking &&
+    existingBooking.wellnessTips &&
+    existingBooking.wellnessTips.length > 0
+  ) {
+    console.log("Using saved wellness tips");
+
+    return res.status(200).json({
+      tips: existingBooking.wellnessTips,
+      source: "saved",
+    });
+  }
+}
 
     const response = await ai.models.generateContent({
       model: "gemini-3.5-flash",
@@ -52,17 +70,42 @@ Write one tip per line.
       .filter(Boolean)
       .slice(0, 4);
 
+      // Save newly generated tips to the booking
+if (bookingId) {
+  await Booking.findByIdAndUpdate(
+    bookingId,
+    {
+      wellnessTips: tips,
+    }
+  );
+
+  console.log("Saved new wellness tips to booking");
+}
+
     res.status(200).json({
       tips,
+      source: "generated",
     });
   } catch (error) {
     console.error("Gemini error:", error);
 
+    const errorText = error.message || "";
+
+    if (
+      errorText.includes("429") ||
+      errorText.includes("RESOURCE_EXHAUSTED") ||
+      errorText.includes("quota")
+    ) {
+      return res.status(429).json({
+        message: "AI wellness tips are temporarily unavailable.",
+        code: "AI_QUOTA_EXCEEDED",
+      });
+    }
+
     res.status(500).json({
       message: "Unable to generate wellness tips.",
-      error: error.message,
     });
   }
 });
- 
+
 module.exports = router;

@@ -9,6 +9,7 @@ function Booking() {
 
   const [service, setService] = useState(null);
   const [bookingCreated, setBookingCreated] = useState(false);
+const [createdBooking, setCreatedBooking] = useState(null);
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -88,7 +89,9 @@ function Booking() {
         );
       }
 
+      setCreatedBooking(data.booking);
       setBookingCreated(true);
+
     } catch (error) {
       console.error(error);
       setMessage(error.message);
@@ -108,7 +111,9 @@ function Booking() {
           Your {service.name} appointment has been created successfully.
         </p>
 
-        <WellnessTips serviceName={service.name}
+       <WellnessTips
+         bookingId={createdBooking?._id}
+        serviceName={service.name}
         category={service.category}
         notes={formData.notes}
         />
