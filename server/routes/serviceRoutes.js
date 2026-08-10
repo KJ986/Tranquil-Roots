@@ -1,6 +1,8 @@
 const express = require("express");
-
 const router = express.Router();
+
+const { protect } = require("../middleware/authMiddleware");
+const ownerOnly = require("../middleware/ownerOnly");
 
 const {
   createService,
@@ -8,21 +10,39 @@ const {
   getServiceById,
   updateService,
   deleteService,
+  getAllServicesForOwner,
 } = require("../controllers/serviceController");
 
-// Create a service
-router.post("/", createService);
-
-// Get all active services
 router.get("/", getServices);
 
-// Get one service by ID
+router.get(
+  "/owner/all",
+  protect,
+  ownerOnly,
+  getAllServicesForOwner
+);
+
 router.get("/:id", getServiceById);
 
-//Update Service
-router.put("/:id", updateService);
+router.post(
+  "/",
+  protect,
+  ownerOnly,
+  createService
+);
 
-//Delete Servivce
-router.delete("/:id", deleteService);
+router.put(
+  "/:id",
+  protect,
+  ownerOnly,
+  updateService
+);
+
+router.delete(
+  "/:id",
+  protect,
+  ownerOnly,
+  deleteService
+);
 
 module.exports = router;

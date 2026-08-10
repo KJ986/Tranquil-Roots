@@ -152,10 +152,30 @@ const deleteService = async (req, res) => {
   }
 };
 
+
+// Get all services for the owner
+const getAllServicesForOwner = async (req, res) => {
+  try {
+    const services = await Service.find().sort({ createdAt: -1 });
+
+    res.status(200).json({
+      count: services.length,
+      services,
+    });
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      message: "Server error.",
+    });
+  }
+};
+
 module.exports = {
   createService,
   getServices,
   getServiceById,
   updateService,
   deleteService,
+  getAllServicesForOwner,
 };
