@@ -24,7 +24,7 @@ function Dashboard() {
 );
 
 const userData = await userResponse.json();
-console.log("Current user:", userData);
+
 
 if (!userResponse.ok) {
   throw new Error(
@@ -34,7 +34,7 @@ if (!userResponse.ok) {
 
 setUser(userData.user);
 
-                console.log("Saved token:", token);
+                
 
                 const response = await fetch(
                     "http://localhost:5000/api/bookings",
@@ -49,7 +49,7 @@ setUser(userData.user);
 
                 const data = await response.json();
 
-                console.log("Bookings response:", data);
+                
 
                 if (!response.ok) {
                     throw new Error(data.message || "Unable to retrieve appointments.");

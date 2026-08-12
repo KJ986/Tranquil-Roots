@@ -31,7 +31,7 @@ const [createdBooking, setCreatedBooking] = useState(null);
 
         const data = await response.json();
 
-        console.log(data);
+        
 
         setService(data.service[0]);
       } catch (error) {

@@ -275,6 +275,8 @@ const handleSaveService = async (serviceId) => {
       )
     );
 
+    setServiceMessage("Service updated successfully!");
+
     setEditingServiceId(null);
   } catch (error) {
     console.error("Edit service error:", error);
@@ -498,6 +500,12 @@ const handleStatusChange = async (bookingId, newStatus) => {
 
             <h2>Current Services</h2>
           </div>
+
+          {serviceMessage && (
+            <p className="owner-service-message">
+             {serviceMessage}
+            </p>
+            )}
 
           <p>
             {services.length}{" "}

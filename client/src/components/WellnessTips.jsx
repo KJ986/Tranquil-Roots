@@ -26,7 +26,7 @@ function WellnessTips({ serviceName, category, notes, bookingId, } = req.body) {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              serviceName,
+            serviceName,
               category,
               notes,
               bookingId,
@@ -34,11 +34,10 @@ function WellnessTips({ serviceName, category, notes, bookingId, } = req.body) {
           }
         );
 
-          console.log("AI response status:", response.status);
-
+          
         const data = await response.json();
 
-         console.log("AI response body:", data);
+         
 
 
         if (!response.ok) {

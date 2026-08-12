@@ -31,7 +31,7 @@ if (bookingId) {
     existingBooking.wellnessTips &&
     existingBooking.wellnessTips.length > 0
   ) {
-    console.log("Using saved wellness tips");
+    
 
     return res.status(200).json({
       tips: existingBooking.wellnessTips,
@@ -79,7 +79,7 @@ if (bookingId) {
     }
   );
 
-  console.log("Saved new wellness tips to booking");
+  
 }
 
     res.status(200).json({

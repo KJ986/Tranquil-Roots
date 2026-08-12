@@ -82,7 +82,7 @@ function Home() {
           <h2>Give yourself permission to pause.</h2>
         </div>
 
-        <Link className="button button--light" to="/booking">
+        <Link to="/services" className="button button--primary">
           Reserve Your Experience
         </Link>
       </section>

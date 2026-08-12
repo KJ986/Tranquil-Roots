@@ -16,7 +16,7 @@ function ServiceDetails() {
 
         const data = await response.json();
 
-        console.log(data);
+        
 
     setService(data.service[0]);
 
