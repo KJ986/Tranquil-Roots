@@ -24,6 +24,8 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
+      "https://tranquil-roots.vercel.app",
+      "https://tranquil-roots-git-main-tranquil-roots.vercel.app",
     ],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
