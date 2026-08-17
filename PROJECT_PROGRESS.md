@@ -49,72 +49,6 @@
 
 - [x] Registration tested successfully in Postman
 
----
-
-# 🚧 Currently Working On
-
-Authentication
-- [ ] Logout
-
----
-
-# Upcoming Features
-
-## Services
-
-- [ ] Service Model
-- [ ] Service API
-- [ ] Service Details
-- [ ] Categories
-
-## Booking System
-
-- [ ] Booking Model
-- [ ] Book Appointment
-- [ ] Update Booking
-- [ ] Cancel Booking
-- [ ] Dashboard
-
-## AI Feature
-
-- [ ] AI Wellness Advisor
-- [ ] AI Service Recommendations
-- [ ] AI Booking Guidance
-
-## Frontend
-
-- [ ] Home Page
-- [ ] About Page
-- [ ] Services Page
-- [ ] Login Page
-- [ ] Register Page
-- [ ] Dashboard
-- [ ] Booking Page
-- [ ] Responsive Design
-
----
-
-# Deployment
-
-- [ ] Deploy Backend
-- [ ] Deploy Frontend
-- [ ] Final Testing
-
----
-
-# Documentation
-
-- [ ] Project Overview
-- [ ] Problem Statement
-- [ ] User Stories
-- [ ] Functional Requirements
-- [ ] Non-functional Requirements
-- [ ] Wireframes
-- [ ] Database Diagram
-- [ ] Architecture Diagram
-- [ ] Final README
-
----
 
 # Git Commit History
 
@@ -122,15 +56,6 @@ Authentication
 
 - Initialize Tranquil Roots full-stack project
 
-### Upcoming
-
-- Implement user login
-- Add JWT authentication
-- Create Service model
-- Implement booking system
-- Build dashboard
-- Integrate AI Wellness Advisor
-- Deploy application
 
 ---
 

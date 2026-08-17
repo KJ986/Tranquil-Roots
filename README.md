@@ -152,7 +152,7 @@ The Node.js and Express backend handles:
 
 ### Data Layer
 
-MongoDB Atlas and Mongoose handle persistent application data.
+MongoDB Atlas and Mongoose handle application data.
 
 Primary application entities include:
 
@@ -260,95 +260,6 @@ tranquil-roots/
 
 The backend requires environment variables to connect to external services.
 
-Create a `.env` file inside the `server` directory.
-
-Example:
-
-```env
-PORT=5000
-
-MONGO_URI=your_mongodb_connection_string
-
-JWT_SECRET=your_jwt_secret
-
-GEMINI_API_KEY=your_gemini_api_key
-```
-
-Do **not** commit the `.env` file or real API keys to GitHub.
-
-Make sure `.env` is included in `.gitignore`.
-
----
-
-## 💻 Local Installation
-
-### 1. Clone the Repository
-
-```bash
-git clone YOUR_GITHUB_REPOSITORY_URL
-```
-
-Move into the project:
-
-```bash
-cd tranquil-roots
-```
-
----
-
-## Backend Setup
-
-Move into the server directory:
-
-```bash
-cd server
-```
-
-Install dependencies:
-
-```bash
-npm install
-```
-
-Create the required `.env` file and add the necessary environment variables.
-
-Start the development server:
-
-```bash
-npm run dev
-```
-
-The backend runs locally on:
-
-```text
-http://localhost:5000
-```
-
----
-
-## Frontend Setup
-
-Open another terminal and move into the client directory:
-
-```bash
-cd client
-```
-
-Install dependencies:
-
-```bash
-npm install
-```
-
-Start the React development server:
-
-```bash
-npm run dev
-```
-
-Vite will display the local frontend URL in the terminal.
-
----
 
 ## 🧪 Testing
 
@@ -431,9 +342,6 @@ AI assisted with areas including:
 * Reviewing responsive design
 * Testing workflows
 
-
-All generated or suggested code was reviewed, tested, debugged, and integrated into the final application as part of the development process.
-
 ---
 
 ## 🚀 Deployment
@@ -443,7 +351,7 @@ All generated or suggested code was reviewed, tested, debugged, and integrated i
 Deployment link:
 
 ```text
-TO BE ADDED AFTER DEPLOYMENT
+
 ```
 
 ### Frontend
@@ -451,7 +359,7 @@ TO BE ADDED AFTER DEPLOYMENT
 Deployment platform:
 
 ```text
-TO BE ADDED
+
 ```
 
 ### Backend API
@@ -459,7 +367,7 @@ TO BE ADDED
 Deployment platform:
 
 ```text
-TO BE ADDED
+
 ```
 
 ### Database
@@ -473,7 +381,7 @@ MongoDB Atlas
 Repository:
 
 ```text
-GITHUB REPOSITORY
+
 ```
 
 ---
@@ -485,37 +393,9 @@ Potential future improvements could include:
 * Email appointment confirmations
 * Appointment reminders
 * Owner analytics and reporting
-* Calendar integration
 * Expanded AI wellness recommendations
 * Service images managed directly from the Owner Dashboard
 * Advanced appointment availability management
 
 ---
 
-## 👩🏽‍💻 Project Purpose
-
-Tranquil Roots was developed as a capstone and portfolio project demonstrating full-stack software engineering skills.
-
-The project demonstrates experience with:
-
-* Frontend development
-* Backend development
-* REST API design
-* Database modeling
-* Authentication
-* Authorization
-* CRUD operations
-* Responsive web design
-* AI API integration
-* Error handling
-* Testing and debugging
-* Git and GitHub
-* Full-stack application architecture
-
----
-
-## 🌿 Tranquil Roots
-
-**Head Spa & Wellness**
-
-A modern wellness booking experience combining thoughtful design, full-stack engineering, and AI-powered customer guidance.
