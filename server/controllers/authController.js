@@ -85,7 +85,7 @@ const loginUser = async (req, res) => {
         userId: user._id,
         role: user.role,
      }, 
-     process.env.JWT_Secret,
+     process.env.JWT_SECRET,
      {
         expiresIn: "1d",
      }     

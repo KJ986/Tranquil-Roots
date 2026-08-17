@@ -35,8 +35,8 @@ const [editServiceForm, setEditServiceForm] = useState({
       try {
         const token = localStorage.getItem("token");
 
-        const response = await fetch(
-          "http://localhost:5000/api/bookings/owner/all",
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/bookings/owner/all`,
+        
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -65,8 +65,7 @@ const [editServiceForm, setEditServiceForm] = useState({
       try {
       const token = localStorage.getItem("token");
 
-const response = await fetch(
-  "http://localhost:5000/api/services/owner/all",
+const response = await fetch(`${import.meta.env.VITE_API_URL}/api/services`,
   {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -110,8 +109,7 @@ const response = await fetch(
 
       const token = localStorage.getItem("token");
 
-      const response = await fetch(
-        "http://localhost:5000/api/services",
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/services`,
         {
           method: "POST",
           headers: {
@@ -178,8 +176,7 @@ const handleToggleService = async (service) => {
   try {
     const token = localStorage.getItem("token");
 
-    const response = await fetch(
-      `http://localhost:5000/api/services/${service._id}`,
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/services/${service._id}`,
       {
         method: "PUT",
         headers: {
@@ -241,8 +238,7 @@ const handleSaveService = async (serviceId) => {
   try {
     const token = localStorage.getItem("token");
 
-    const response = await fetch(
-      `http://localhost:5000/api/services/${serviceId}`,
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/services/${serviceId}`,
       {
         method: "PUT",
         headers: {
@@ -289,9 +285,8 @@ const handleStatusChange = async (bookingId, newStatus) => {
   try {
     const token = localStorage.getItem("token");
 
-    const response = await fetch(
-      `http://localhost:5000/api/bookings/owner/${bookingId}/status`,
-      {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/services/${bookingId}`,
+        {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

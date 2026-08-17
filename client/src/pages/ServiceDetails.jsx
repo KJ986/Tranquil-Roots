@@ -11,7 +11,7 @@ function ServiceDetails() {
     const fetchService = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/services/${id}`
+          `${import.meta.env.VITE_API_URL}/api/services/${id}`
         );
 
         const data = await response.json();

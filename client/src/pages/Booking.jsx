@@ -25,8 +25,7 @@ const [createdBooking, setCreatedBooking] = useState(null);
   useEffect(() => {
     const fetchService = async () => {
       try {
-        const response = await fetch(
-          `http://localhost:5000/api/services/${serviceId}`
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/services/${serviceId}`
         );
 
         const data = await response.json();
@@ -59,8 +58,7 @@ const [createdBooking, setCreatedBooking] = useState(null);
 
       const token = localStorage.getItem("token");
 
-      const response = await fetch(
-        "http://localhost:5000/api/bookings",
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/bookings`,
         {
           method: "POST",
           headers: {

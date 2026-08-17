@@ -14,8 +14,8 @@ function Dashboard() {
                 const token = localStorage.getItem("token");
 
                     // Fetch logged-in user
-                    const userResponse = await fetch(
-  "http://localhost:5000/api/auth/me",
+                    const userResponse = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/me`
+,
   {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -36,8 +36,7 @@ setUser(userData.user);
 
                 
 
-                const response = await fetch(
-                    "http://localhost:5000/api/bookings",
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/api/bookings`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
@@ -77,8 +76,7 @@ const handleCancelBooking = async (bookingId, serviceName) => {
   try {
     const token = localStorage.getItem("token");
 
-    const response = await fetch(
-      `http://localhost:5000/api/bookings/${bookingId}`,
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/bookings/${bookingsId}`,
       {
         method: "DELETE",
         headers: {
