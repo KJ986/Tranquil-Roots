@@ -14,7 +14,7 @@ router.post("/wellness-tips", async (req, res) => {
       serviceName,
       category,
       notes,
-      bookingId
+      bookingId,
     } = req.body;
 
     if (!serviceName || !category) {
