@@ -285,7 +285,7 @@ const handleStatusChange = async (bookingId, newStatus) => {
   try {
     const token = localStorage.getItem("token");
 
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/services/${bookingId}`,
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/bookings/owner/${bookingId}/status`,
         {
         method: "PUT",
         headers: {
