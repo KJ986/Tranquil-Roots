@@ -329,7 +329,7 @@ Navigation, service cards, booking forms, dashboards, and owner-management contr
 
 AI tools were used as development assistants throughout the software development lifecycle.
 
-AI assisted with areas including:
+AI assisted with:
 
 
 * Debugging frontend and backend errors
@@ -348,43 +348,49 @@ AI assisted with areas including:
 
 ### Live Application
 
-Deployment link:
+Tranquil Roots is available at:
+
 
 ```text
+https://tranquil-roots.vercel.app
 
 ```
 
 ### Frontend
+The React/Vite frontend is deployed using Vercel.
 
-Deployment platform:
+**Platform:** Vercel
 
-```text
+**Production URL:**  
+https://tranquil-roots.vercel.app
 
-```
+The production frontend communicates with the deployed REST API using the `VITE_API_URL` environment variable.
 
 ### Backend API
 
-Deployment platform:
+The Node.js and Express REST API is deployed using Render.
 
-```text
+**Platform:** Render
 
-```
+**API URL:**  
+https://tranquil-roots-api.onrender.com
+
+The production backend connects to MongoDB Atlas and manages authentication, services, bookings, owner functionality, and AI integration.
 
 ### Database
 
 MongoDB Atlas
+**Platform:** MongoDB Atlas
+
+MongoDB Atlas provides the production database for:
+
+- Users
+- Services
+- Bookings
 
 ---
 
-## 🔗 GitHub Repository
 
-Repository:
-
-```text
-
-```
-
----
 
 ## 🔮 Possible Future Enhancements
 
@@ -399,3 +405,64 @@ Potential future improvements could include:
 
 ---
 
+```
+## 🔗 GitHub Repository
+
+The complete source code for Tranquil Roots is available on GitHub:
+https://github.com/KJ986/Tranquil-Roots
+
+
+## 💻 Running the Project Locally
+
+### Prerequisites
+
+Before running Tranquil Roots locally, make sure you have:
+
+- Node.js
+- npm
+- MongoDB Atlas access
+- A Google Gemini API key
+
+### Clone the Repository
+
+```bash
+git clone YOUR-GITHUB-REPOSITORY-URL
+cd tranquil-roots
+```
+
+### Install Backend Dependencies
+
+```bash
+cd server
+npm install
+```
+
+Create the required `server/.env` file, then start the backend:
+
+```bash
+npm run dev
+```
+
+The development API runs on:
+
+```text
+http://localhost:5000
+```
+
+### Install Frontend Dependencies
+
+Open another terminal:
+
+```bash
+cd client
+npm install
+npm run dev
+```
+
+The Vite development server typically runs on:
+
+```text
+http://localhost:5173
+```
+
+The frontend communicates with the backend through the `VITE_API_URL` environment variable.
